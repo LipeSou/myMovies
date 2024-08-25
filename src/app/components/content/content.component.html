@@ -1,3 +1,55 @@
-<div class="flex items-center justify-center h-3/4">
-  <p>content works!</p>
-</div>
+<!-- <div class="flex flex-col gap-10 items-center justify-center h-3/4">
+  <h1 class="text-3xl font-bold text-purple-500">
+    {{tmdbMovie?.title}}
+  </h1>
+  <div class="flex w-2/3 items-center justify-center gap-28">
+    @if (tmdbMovie?.poster_path) {
+      <img 
+        [src]="'https://image.tmdb.org/t/p/w500/' + (tmdbMovie?.poster_path)" 
+        alt="Movie Poster" 
+        width="300px" 
+        height="300px" 
+      />
+    }
+    <p class="w-64">
+      {{ tmdbMovie?.overview }}
+    </p>
+  </div>
+  // c1f02cd69c35c2e218e9500820677e6c1aa05c4b
+  <div>
+    <p class="text-base text-white">Nota: <span class="font-bold">
+      {{ tmdbMovie?.vote_average }}
+    </span></p>
+    <p class="text-base text-white">Gêneros: 
+      @for (genre of tmdbMovie?.genres; track genre?.id) {
+        <span class="font-bold">
+          {{ genre.name }}
+        </span>
+      }
+    </p>
+  </div>
+</div> -->
+<section class="text-gray-400 body-font bg-gray-900">
+  <div class="container px-5 py-24 mx-auto">
+    <div class="flex flex-wrap w-full mb-20">
+      <div class="lg:w-1/2 w-full mb-6 lg:mb-0">
+        <h1 class="sm:text-3xl text-2xl font-medium title-font mb-2 text-white">Os filmes mais populares! Weeeeeh</h1>
+        <div class="h-1 w-20 bg-indigo-500 rounded"></div>
+      </div>
+    </div>
+    <div class="flex gap-8 overflow-x-auto overflow-y-hidden">
+      @for (movie of tmdbMovie?.results; track movie.id) {
+        <div class="flex flex-wrap -m-4">
+          <div class="xl:w-52 md:w-w-52 p-4 h-96">
+            <div class="bg-gray-800 bg-opacity-40 p-6 rounded-lg">
+              <img class="h-40 rounded w-24 object-cover object-center mb-6" [src]="'https://image.tmdb.org/t/p/w500/' + (movie?.poster_path)" alt="content">
+              <!-- <h3 class="tracking-widest text-indigo-400 text-xs font-medium title-font">SUBTITLE</h3> -->
+              <h2 class="text-lg text-white font-medium title-font mb-4 w-24">{{ movie?.title }}</h2>
+              <p class="leading-relaxed text-base">Nota: {{ movie?.vote_average }}</p>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
