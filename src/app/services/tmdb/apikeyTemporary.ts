@@ -1,0 +1,1 @@
+export const apiKeyTemporary = "d5cf27f9ea9d20ec45b1f08479ce34e8"

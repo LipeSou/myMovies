@@ -3,6 +3,8 @@ import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from "./components/navbar/navbar.component";
 import { ContentComponent } from "./components/content/content.component";
 import { FooterComponent } from "./components/footer/footer.component";
+import type {  TmdbTrendingMovie } from './types/TmdbTrending';
+import { Time, Type, TrendingService } from './services/tmdb/trendings/trending.service';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +13,22 @@ import { FooterComponent } from "./components/footer/footer.component";
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
+
 export class AppComponent {
-  title = 'myMovies';
+  trendingMovies: TmdbTrendingMovie[] | null = null
+  topRatedTrendingMovie: TmdbTrendingMovie | null = null
+  
+
+  constructor(private trendingService: TrendingService){}
+
+  ngOnInit(): void {
+    this.trendingService.getTrendingMovies({
+      time: Time.DAY, 
+      type: Type.ALL
+    }).subscribe((data) => {
+      const movies = [...data.results]
+      this.trendingMovies = data.results
+      this.topRatedTrendingMovie = movies.slice(0,7).sort((a,b) => b.vote_average - a.vote_average)[0]
+    })
+  }
 }
