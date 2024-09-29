@@ -2,13 +2,14 @@ import { NgOptimizedImage } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { CarouselModule } from 'primeng/carousel';
 import type { TmdbTrendingMovie } from '../../../types/TmdbTrending';
+import { UiMyMoviesTitleComponent } from '../../ui/my-movies-title/ui-my-movies-title.component';
 
 @Component({
   selector: 'app-trending-content',
   standalone: true,
   imports: [
-    NgOptimizedImage, CarouselModule
-  ],
+    NgOptimizedImage, CarouselModule, UiMyMoviesTitleComponent
+],
   templateUrl: './trending-content.component.html',
 })
 export class TrendingContentComponent {
@@ -16,19 +17,34 @@ export class TrendingContentComponent {
 
   responsiveOptions = [
     {
+      breakpoint: '3000px',
+      numVisible: 9.5,
+      numScroll: 1
+    },
+    {
+      breakpoint: '1364px',
+      numVisible: 8.5,
+      numScroll: 1
+    },
+    {
       breakpoint: '1024px',
-      numVisible: 5,
-      numScroll: 1 // Adicione esta linha
+      numVisible: 6.5,
+      numScroll: 1
     },
     {
       breakpoint: '768px',
-      numVisible: 4,
-      numScroll: 1 // Adicione esta linha
+      numVisible: 5.5,
+      numScroll: 1
     },
     {
       breakpoint: '560px',
-      numVisible: 3,
-      numScroll: 1 // Adicione esta linha
+      numVisible: 3.2,
+      numScroll: 1
+    },
+    {
+      breakpoint: '375px',
+      numVisible: 2.8,
+      numScroll: 1
     }
   ];
 }

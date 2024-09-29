@@ -1,13 +1,18 @@
-<section class="text-gray-400 body-font">
-  <div class="container px-5 mx-auto">
-    <h1 class="sm:text-xl text-xl font-medium title-font mb-2 text-[#E1C964] ">
-      Os mais populares
-    </h1>
-    <p-carousel [value]="trendingMovies ?? []" [numVisible]="5" [numScroll]="1" [responsiveOptions]="responsiveOptions" [showIndicators]="false">
+<section>
+  <div class="">
+    <ui-my-movies-title title="Os mais populares" />
+    <p-carousel 
+      [value]="trendingMovies ?? []" 
+      [numScroll]="1" 
+      [responsiveOptions]="responsiveOptions" 
+      [showIndicators]="false"
+      [showNavigators]="false"
+      >
       <ng-template pTemplate="item" let-movie>
-        <img class="h-40 w-28 rounded object-cover object-center mb-6 mr-4" 
+        <img class="h-40 w-28 rounded object-cover object-center " 
             [src]="'https://image.tmdb.org/t/p/w500/' + (movie?.poster_path)" 
             alt="content">
+        <p class="w-28 h-10 italic text-gray-300 text-ellipsis">{{ movie?.title || movie.name }}</p>
       </ng-template>
     </p-carousel>
   </div>

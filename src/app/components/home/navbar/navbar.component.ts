@@ -8,5 +8,5 @@ import type { TmdbTrendingMovie } from '../../../types/TmdbTrending';
   templateUrl: './navbar.component.html',
 })
 export class NavbarComponent {
-  @Input({required: true}) topRatedtrendingMovies: TmdbTrendingMovie | null = null
+  @Input({required: true}) topRatedtrendingMovies: TmdbTrendingMovie[] | [] = []
 }

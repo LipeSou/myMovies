@@ -11,12 +11,11 @@ import { Time, Type, TrendingService } from './services/tmdb/trendings/trending.
   standalone: true,
   imports: [RouterOutlet, NavbarComponent, ContentComponent, FooterComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
 })
 
 export class AppComponent {
-  trendingMovies: TmdbTrendingMovie[] | null = null
-  topRatedTrendingMovie: TmdbTrendingMovie | null = null
+  trendingMovies: TmdbTrendingMovie[] | [] = []
+  topRatedTrendingMovie: TmdbTrendingMovie[] | [] = []
   
 
   constructor(private trendingService: TrendingService){}
@@ -28,7 +27,7 @@ export class AppComponent {
     }).subscribe((data) => {
       const movies = [...data.results]
       this.trendingMovies = data.results
-      this.topRatedTrendingMovie = movies.slice(0,7).sort((a,b) => b.vote_average - a.vote_average)[0]
+      this.topRatedTrendingMovie = movies.slice(0,7).sort((a,b) => b.vote_average - a.vote_average).slice(0,2)
     })
   }
 }

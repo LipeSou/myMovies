@@ -1,0 +1,20 @@
+<section class="mb-4">
+  <p-galleria 
+    [value]="images" 
+    [showThumbnails]="false" 
+    [showIndicators]="false" 
+    [circular]="true"
+    [autoPlay]="true" 
+    [transitionInterval]="8000" 
+    containerClass="main-galleria"
+    >
+    <!-- Template para exibição das imagens -->
+    <ng-template pTemplate="item" let-item>
+      <img 
+        [src]="item.source" 
+        [alt]="item.alt" 
+        class="gallery-image h-[416px] rounded-lg object-cover"
+        >
+    </ng-template>
+  </p-galleria>
+  </section>

@@ -31,6 +31,6 @@ export class TrendingService {
   constructor(private http: HttpClient) { }
   
   getTrendingMovies(getTrendingMoviesService: GetTrendingMoviesService) : Observable<TmdbTrending>{
-    return this.http.get<TmdbTrending>(`${this.url}/trending/${getTrendingMoviesService.type}/${getTrendingMoviesService.time}?api_key=${apiKeyTemporary}`)
+    return this.http.get<TmdbTrending>(`${this.url}/trending/${getTrendingMoviesService.type}/${getTrendingMoviesService.time}?api_key=${apiKeyTemporary}&language=pt-BR`)
   }
 }
