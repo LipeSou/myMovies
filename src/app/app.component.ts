@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { NavbarComponent } from "./components/navbar/navbar.component";
-import { ContentComponent } from "./components/content/content.component";
-import { FooterComponent } from "./components/footer/footer.component";
+import { NavbarComponent } from "./components/home/navbar/navbar.component";
+import { ContentComponent } from "./components/home/content/content.component";
+import { FooterComponent } from "./components/home/footer/footer.component";
 import type {  TmdbTrendingMovie } from './types/TmdbTrending';
 import { Time, Type, TrendingService } from './services/tmdb/trendings/trending.service';
 
