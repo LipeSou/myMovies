@@ -1,5 +1,4 @@
-import { Component, Input } from '@angular/core';
-import type { TmdbTrendingMovie } from '../../../types/TmdbTrending';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
@@ -7,6 +6,4 @@ import type { TmdbTrendingMovie } from '../../../types/TmdbTrending';
   imports: [],
   templateUrl: './navbar.component.html',
 })
-export class NavbarComponent {
-  @Input({required: true}) topRatedtrendingMovies: TmdbTrendingMovie[] | [] = []
-}
+export class NavbarComponent {}

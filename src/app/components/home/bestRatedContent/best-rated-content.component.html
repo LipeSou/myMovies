@@ -9,11 +9,16 @@
     containerClass="main-galleria"
     >
     <!-- Template para exibição das imagens -->
-    <ng-template pTemplate="item" let-item>
+    <ng-template 
+      pTemplate="item" 
+      let-item
+      
+      >
       <img 
         [src]="item.source" 
         [alt]="item.alt" 
-        class="gallery-image h-[416px] rounded-lg object-cover"
+        (click)="toMovieDetails(item.id)"
+        class="gallery-image h-[416px] rounded-lg object-cover cursor-pointer"
         >
     </ng-template>
   </p-galleria>
