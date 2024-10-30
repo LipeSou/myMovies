@@ -17,7 +17,7 @@
       <img 
         [src]="item.source" 
         [alt]="item.alt" 
-        (click)="toMovieDetails(item.id)"
+        (click)="toMovieDetails(item.mediaType, item.id)"
         class="gallery-image h-[416px] rounded-lg object-cover cursor-pointer"
         >
     </ng-template>

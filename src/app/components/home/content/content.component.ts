@@ -3,7 +3,7 @@ import type { TmdbTrendingMovie } from '../../../types/TmdbTrending';
 import { TrendingContentComponent } from '../trendingContent/trending-content.component';
 import { BestRatedContentComponent } from "../bestRatedContent/best-rated-content.component";
 import { Time, Type, TrendingService } from '../../../services/tmdb/trendings/trending.service';
-import { NavbarComponent } from "../navbar/navbar.component";
+import { NavbarComponent } from "../../ui/navbar/navbar.component";
 
 @Component({
   selector: 'app-content',

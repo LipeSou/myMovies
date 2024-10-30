@@ -3,6 +3,15 @@ import type { TmdbTrendingMovie } from '../../../types/TmdbTrending';
 import { GalleriaModule } from 'primeng/galleria';
 import { Router } from '@angular/router';
 
+
+interface Images {
+  source: string,
+  alt: string | undefined,
+  title: string | undefined,
+  id: string | number,
+  mediaType: string
+}
+
 @Component({
   selector: 'best-rated-content',
   standalone: true,
@@ -11,7 +20,7 @@ import { Router } from '@angular/router';
 })
 export class BestRatedContentComponent {
   @Input({required: true}) bestRateds: TmdbTrendingMovie[] | [] = []
-  images: any[] = [];
+  images: Images[] = [];
 
   constructor(private router: Router) {}
 
@@ -26,16 +35,16 @@ export class BestRatedContentComponent {
   }
 
   updateImages() {
-    console.log("this.bestRateds", this.bestRateds)
     this.images = this.bestRateds.map(movie => ({
       source: 'https://image.tmdb.org/t/p/w500/' + movie.poster_path,
       alt: movie.title || movie.name,
       title: movie.title || movie.name,
-      id: movie.id
+      id: movie.id,
+      mediaType: movie.media_type
     }));
   }
 
-  toMovieDetails(id: number) {
-    this.router.navigate(['/detalhes-filme', id])
+  toMovieDetails( mediaType: string, id: number ) {
+    this.router.navigate(['/detalhes-filme', mediaType,  id])
   }
 }

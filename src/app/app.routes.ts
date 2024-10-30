@@ -4,5 +4,5 @@ import { ContentComponent } from './components/home/content/content.component';
 
 export const routes: Routes = [
   { path: '', component: ContentComponent },
-  { path: 'detalhes-filme/:id', component: MovieDetailsContent}
+  { path: 'detalhes-filme/:type/:id', component: MovieDetailsContent}
 ];
