@@ -13,7 +13,7 @@ frontend:
       commands:
         - npm run build  # Usa o script de build definido no package.json
   artifacts:
-    baseDirectory: dist  # Pasta de saída do build Angular
+    baseDirectory: dist/my-movies  # Pasta de saída do build Angular
     files:
       - '**/*'
   cache:
