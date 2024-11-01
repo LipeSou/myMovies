@@ -13,7 +13,7 @@ frontend:
       commands:
         - npm install -g @angular/cli
         - ng version
-        - ng build --configuration=production
+        - ng build --configuration=production --base-href /my-movies/browser/
   artifacts:
     baseDirectory: dist/my-movies/browser  # Pasta de saída do build Angular
     files:
