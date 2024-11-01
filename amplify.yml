@@ -11,7 +11,9 @@ frontend:
         - npm install
     build:
       commands:
-        - npm run build  # Usa o script de build definido no package.json
+        - npm install -g @angular/cli
+        - ng version
+        - ng build --configuration=production
   artifacts:
     baseDirectory: dist/my-movies/browser  # Pasta de saída do build Angular
     files:
