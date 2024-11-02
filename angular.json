@@ -46,7 +46,7 @@
                 }
               ],
               "outputHashing": "all",
-              "baseHref": "/my-movies/browser/"
+              "baseHref": "/"
             },
             "development": {
               "optimization": false,
