@@ -4,11 +4,12 @@ import { TrendingContentComponent } from '../trendingContent/trending-content.co
 import { BestRatedContentComponent } from "../bestRatedContent/best-rated-content.component";
 import { Time, Type, TrendingService } from '../../../services/tmdb/trendings/trending.service';
 import { NavbarComponent } from "../../ui/navbar/navbar.component";
+import { FooterComponent } from "../footer/footer.component";
 
 @Component({
   selector: 'app-content',
   standalone: true,
-  imports: [TrendingContentComponent, BestRatedContentComponent, NavbarComponent],
+  imports: [TrendingContentComponent, BestRatedContentComponent, NavbarComponent, FooterComponent],
   templateUrl: './content.component.html',
 })
 export class ContentComponent {
