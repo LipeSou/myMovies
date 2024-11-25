@@ -30,21 +30,6 @@ export class TrendingContentComponent {
       breakpoint: '1024px',
       numVisible: 6.5,
       numScroll: 4
-    },
-    {
-      breakpoint: '768px',
-      numVisible: 5.5,
-      numScroll: 0
-    },
-    {
-      breakpoint: '560px',
-      numVisible: 3.2,
-      numScroll: 0
-    },
-    {
-      breakpoint: '375px',
-      numVisible: 2.8,
-      numScroll: 0
     }
   ];
 
