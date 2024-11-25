@@ -36,9 +36,10 @@ export class BestRatedContentComponent {
 
   updateImages() {
     this.images = this.bestRateds.map(movie => ({
-      source: 'https://image.tmdb.org/t/p/w500/' + movie.poster_path,
+      source: 'https://image.tmdb.org/t/p/w500/' + movie.backdrop_path,
       alt: movie.title || movie.name,
       title: movie.title || movie.name,
+      overview: movie.overview,
       id: movie.id,
       mediaType: movie.media_type
     }));

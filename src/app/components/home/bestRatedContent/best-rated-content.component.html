@@ -8,18 +8,24 @@
     [transitionInterval]="8000" 
     containerClass="main-galleria"
     >
-    <!-- Template para exibição das imagens -->
     <ng-template 
       pTemplate="item" 
       let-item
-      
       >
-      <img 
-        [src]="item.source" 
-        [alt]="item.alt" 
-        (click)="toMovieDetails(item.mediaType, item.id)"
-        class="gallery-image h-[416px] rounded-lg object-cover cursor-pointer"
-        >
+        <div class="relative">
+          <!-- Imagem -->
+          <img 
+            [src]="item.source" 
+            [alt]="item.alt" 
+            (click)="toMovieDetails(item.mediaType, item.id)"
+            class="gallery-image h-[416px] w-full rounded-lg object-cover cursor-pointer"
+          />
+          <!-- Parágrafo posicionado absolutamente sobre a imagem -->
+          <div class="text-xl absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white text-center p-2">
+            {{ item.title || item.name }}
+            <p class="text-xs">{{ item.overview }}</p>
+          </div>
+        </div>
     </ng-template>
   </p-galleria>
   </section>
