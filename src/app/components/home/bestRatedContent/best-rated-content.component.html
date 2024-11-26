@@ -1,4 +1,4 @@
-<section class="mb-4">
+<section class="mb-16">
   <p-galleria 
     [value]="images" 
     [showThumbnails]="false" 
@@ -17,13 +17,19 @@
           <img 
             [src]="item.source" 
             [alt]="item.alt" 
-            (click)="toMovieDetails(item.mediaType, item.id)"
-            class="gallery-image h-[416px] w-full rounded-lg object-cover cursor-pointer"
+            class="gallery-image  w-full rounded-lg object-cover"
           />
-          <!-- Parágrafo posicionado absolutamente sobre a imagem -->
-          <div class="text-xl absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white text-center p-2">
-            {{ item.title || item.name }}
-            <p class="text-xs">{{ item.overview }}</p>
+          <div class="absolute  bottom-[-40px] left-0 right-0 text-center ">
+            <button  
+            (click)="toMovieDetails(item.mediaType, item.id)"
+            class=" text-xl p-4 rounded bg-black  text-white font-medium border border-solid border-[#E1C964]"
+            >
+              <div class="flex items-center gap-2">
+                <ng-icon name="phosphorFilmSlateBold" size="32" color="#E1C964"></ng-icon>
+
+                <span>Ver Mais</span>
+              </div>
+            </button>
           </div>
         </div>
     </ng-template>
