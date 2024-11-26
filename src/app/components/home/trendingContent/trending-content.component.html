@@ -1,7 +1,7 @@
 <section>
   <ui-my-movies-title title="Tendências de hoje" />
   <ng-container *ngIf="isMobile">
-    <div class="flex flex-row overflow-x-auto overflow-y-hidden">
+    <div class="flex flex-row overflow-x-auto overflow-y-hidden no-scrollbar">
       <div class="mr-4 flex-shrink-0" *ngFor="let movie of trendingMovies">
         <img
           class="h-40 w-28 rounded object-cover object-center"
