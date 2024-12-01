@@ -4,6 +4,7 @@ import { catchError, Observable, throwError } from 'rxjs';
 import { tmdbGlobalVariables } from '../globalVariables/gobalVariables';
 import { apiKeyTemporary } from '../apikeyTemporary';
 import type { TmdbTvDetails } from '../../../types/TmdbTvDetails';
+import type { MovieProvider } from '../../../types/MovieProvider';
 
 
 @Injectable({
@@ -20,6 +21,16 @@ export class TvDetailsService {
     .pipe(
       catchError((error: any) => {
         console.error('Erro ao buscar detalhes da série:', error);
+        return throwError(() => new Error(error));
+      })
+    );
+  }
+  // busca quais streamings estao disponiveis para assistir
+  getTvProviders({movieId} : { movieId: number}) : Observable<MovieProvider>{
+    return this.http.get<MovieProvider>(`${this.url}/tv/${movieId}/watch/providers?api_key=${apiKeyTemporary}&language=pt-BR`)
+    .pipe(
+      catchError((error: any) => {
+        console.error('Erro ao buscar detalhes do filme:', error);
         return throwError(() => new Error(error));
       })
     );

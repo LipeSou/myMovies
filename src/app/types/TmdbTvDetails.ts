@@ -3,7 +3,7 @@ export interface Genres {
   "name": string
 }
 
-interface Seasons {
+export interface Seasons {
   "air_date": string,
   "episode_count": number,
   "id": number,
@@ -12,6 +12,13 @@ interface Seasons {
   "poster_path": string,
   "season_number": number,
   "vote_average": number
+}
+
+export interface Networks {
+  "id": number,
+  "logo_path": string,
+  "name": string,
+  "origin_country": string
 }
 
 export interface TmdbTvDetails  {
@@ -43,14 +50,7 @@ export interface TmdbTvDetails  {
   },
   "name": string,
   "next_episode_to_air": number | null,
-  "networks": [
-    {
-      "id": number,
-      "logo_path": string,
-      "name": string,
-      "origin_country": string
-    }
-  ],
+  "networks": Networks[],
   "number_of_episodes": number,
   "number_of_seasons": number,
   "origin_country": string[],

@@ -4,15 +4,18 @@ import { NavbarComponent } from "../../ui/navbar/navbar.component";
 import { ActivatedRoute } from '@angular/router';
 import { MovieDetailsHeaderComponent } from "../movie-details-header/movie-details-header.component";
 import { TvDetailsService } from '../../../services/tmdb/tvDetails/tvDetails.service';
-import type { Genres } from '../../../types/TmdbTvDetails';
+import type { Genres, Networks } from '../../../types/TmdbTvDetails';
+import type { Flatrate } from '../../../types/MovieProvider';
 
 export interface Details {
   title: string, 
   originalTitle: string, 
   posterPath: string | null, 
+  backdropPath: string | null,
   overview: string, 
   genres: Genres[], 
-  voteAverage: string
+  voteAverage: string,
+  networks?: Networks[]
 }
 
 @Component({
@@ -24,6 +27,7 @@ export interface Details {
 export class MovieDetailsContent {
   movie: Details | null = null
   movieId: number | null = null
+  movieProvider: Flatrate[] | [] = []
 
   constructor(
     private movieDetailsService: MovieDetailsService,
@@ -47,16 +51,18 @@ export class MovieDetailsContent {
   }
 
   loadMovieDetails(): void {
+    // busca os detalhes do filme
     this.movieDetailsService.getMovie({ 
       movieId: this.movieId as number
     }).subscribe(data => {
       const { 
         title, 
         original_title, 
+        backdrop_path,
         poster_path, 
         overview, 
         genres, 
-        vote_average
+        vote_average,
       } = data
       console.log("data movie", data)
       this.movie = {
@@ -65,8 +71,23 @@ export class MovieDetailsContent {
         overview,
         genres,
         posterPath: poster_path,
-        voteAverage: vote_average.toFixed(2)
+        backdropPath: backdrop_path,
+        voteAverage: vote_average.toFixed(1)
       }
+    })
+    // busca quais streamings o filme esta disponivel
+    this.movieDetailsService.getWatchProviders({
+      movieId: this.movieId as number
+    }).subscribe((data) => {
+      const flatrateProviders = data.results?.BR?.flatrate || [];
+
+      const providers = flatrateProviders.filter(provider => {
+        if(provider.provider_name !== "Netflix basic with Ads"){
+          return provider;
+        }
+        return
+      })
+      this.movieProvider = providers
     })
   }
   loadTvDetails(): void {
@@ -76,10 +97,12 @@ export class MovieDetailsContent {
       const { 
         name, 
         original_name, 
-        poster_path, 
+        backdrop_path, 
+        poster_path,
         overview, 
         genres, 
-        vote_average
+        vote_average,
+        networks
       } = data
       console.log("data tv", data)
       this.movie = {
@@ -88,8 +111,25 @@ export class MovieDetailsContent {
         overview,
         genres,
         posterPath: poster_path,
-        voteAverage: vote_average.toFixed(2)
+        backdropPath: backdrop_path,
+        voteAverage: vote_average.toFixed(1),
+        networks
       }
+    })
+    // busca quais streamings o filme esta disponivel
+    this.tvDetailsService.getTvProviders({
+      movieId: this.movieId as number
+    }).subscribe((data) => {
+      console.log("data", data)
+      const flatrateProviders = data.results?.BR?.flatrate || [];
+
+      const providers = flatrateProviders.filter(provider => {
+        if(provider.provider_name !== "Netflix basic with Ads"){
+          return provider;
+        }
+        return
+      })
+      this.movieProvider = providers
     })
   }
 }
