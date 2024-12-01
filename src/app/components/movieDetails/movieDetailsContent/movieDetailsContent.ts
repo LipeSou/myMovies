@@ -3,6 +3,17 @@ import { Component } from '@angular/core';
 import { NavbarComponent } from "../../ui/navbar/navbar.component";
 import { ActivatedRoute } from '@angular/router';
 import { MovieDetailsHeaderComponent } from "../movie-details-header/movie-details-header.component";
+import { TvDetailsService } from '../../../services/tmdb/tvDetails/tvDetails.service';
+import type { Genres } from '../../../types/TmdbTvDetails';
+
+export interface Details {
+  title: string, 
+  originalTitle: string, 
+  posterPath: string | null, 
+  overview: string, 
+  genres: Genres[], 
+  voteAverage: string
+}
 
 @Component({
   selector: 'movie-details-content',
@@ -11,20 +22,26 @@ import { MovieDetailsHeaderComponent } from "../movie-details-header/movie-detai
   templateUrl: './movieDetailsContent.component.html',
 })
 export class MovieDetailsContent {
-  movie: any | null = null
+  movie: Details | null = null
   movieId: number | null = null
 
   constructor(
     private movieDetailsService: MovieDetailsService,
+    private tvDetailsService: TvDetailsService,
     private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');
+      const type = params.get('type');
       if (id) {
-        this.movieId = +id; // Converter para número
-        this.loadMovieDetails();
+        this.movieId = +id; 
+        if(type === "tv"){
+          this.loadTvDetails();
+        }else{
+          this.loadMovieDetails();
+        }
       }
     });  
   }
@@ -36,19 +53,42 @@ export class MovieDetailsContent {
       const { 
         title, 
         original_title, 
-        backdrop_path, 
+        poster_path, 
         overview, 
         genres, 
-        release_date
+        vote_average
       } = data
-      console.log("data", data)
+      console.log("data movie", data)
       this.movie = {
         title,
         originalTitle: original_title,
         overview,
         genres,
-        backdropPath: backdrop_path,
-        releaseDate: release_date
+        posterPath: poster_path,
+        voteAverage: vote_average.toFixed(2)
+      }
+    })
+  }
+  loadTvDetails(): void {
+    this.tvDetailsService.getTv({ 
+      tvId: this.movieId as number
+    }).subscribe(data => {
+      const { 
+        name, 
+        original_name, 
+        poster_path, 
+        overview, 
+        genres, 
+        vote_average
+      } = data
+      console.log("data tv", data)
+      this.movie = {
+        title: name,
+        originalTitle: original_name,
+        overview,
+        genres,
+        posterPath: poster_path,
+        voteAverage: vote_average.toFixed(2)
       }
     })
   }

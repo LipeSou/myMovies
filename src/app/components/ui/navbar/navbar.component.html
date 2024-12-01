@@ -1,6 +1,11 @@
-<header>
-    <div class="p-2 flex items-center gap-1">
+<header class="absolute z-10 w-screen bg-black bg-opacity-80">
+    <div 
+      class="p-2 flex items-center gap-1"
+      (click)="toHome()"
+      >
       <ng-icon name="phosphorPopcornBold" size="32" color="#E1C964"></ng-icon>
-      <h1 class="text-[#E1C964]  text-xl">My Movies</h1>
+      <h1 class="text-[#E1C964]  text-xl">
+        My Movies
+      </h1>
     </div>
 </header>

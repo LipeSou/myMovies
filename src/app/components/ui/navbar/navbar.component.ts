@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { phosphorPopcornBold } from '@ng-icons/phosphor-icons/bold';
 
@@ -10,4 +11,9 @@ providers: [provideIcons({ phosphorPopcornBold })],
 
   templateUrl: './navbar.component.html',
 })
-export class NavbarComponent {}
+export class NavbarComponent {
+  constructor(private router: Router) {}
+  toHome() {
+    this.router.navigate(['/'])
+  }
+}

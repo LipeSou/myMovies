@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import type { Details } from '../movieDetailsContent/movieDetailsContent';
 
 @Component({
   selector: 'app-movie-details-header',
@@ -7,5 +8,5 @@ import { Component, Input } from '@angular/core';
   templateUrl: './movie-details-header.component.html',
 })
 export class MovieDetailsHeaderComponent {
-  @Input({ required: true }) movieDetais: any | null
+  @Input({ required: true }) movieDetais: Details | null = null
 }

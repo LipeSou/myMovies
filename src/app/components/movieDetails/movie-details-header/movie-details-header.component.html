@@ -1,1 +1,26 @@
-<p>{{ movieDetais.title }}</p>
+<div class="w-screen"> 
+  <div>
+    <img 
+    [src]="'https://image.tmdb.org/t/p/w500/' + (movieDetais?.posterPath)" 
+    [alt]="movieDetais?.title" 
+    class=" gallery-image  w-full rounded-lg object-cover"
+    />
+    <div class="relative flex items-center justify-center border-yellow-300 border-2 p-4 border-solid rounded-full w-14 h-14 bottom-11 left-[80vw] bg-black bg-opacity-80">
+      <span class="text-lg font-extrabold text-yellow-300 ">{{ movieDetais?.voteAverage }}</span>
+    </div>
+  </div>
+  <div class="px-4">
+    <div class="text-xs mb-3">
+      @for (genre of movieDetais?.genres; track genre?.name) {
+          <span>{{ genre.name }}</span>
+          @if (!$last) {
+            <span>,</span>
+          }
+      }
+    </div>
+    <p class="italic font-extralight">
+      {{ movieDetais?.overview }}
+    </p>
+    
+  </div>
+</div>

@@ -3,6 +3,7 @@ import { Component, HostListener, Input } from '@angular/core';
 import { CarouselModule } from 'primeng/carousel';
 import type { TmdbTrendingMovie } from '../../../types/TmdbTrending';
 import { UiMyMoviesTitleComponent } from '../../ui/my-movies-title/ui-my-movies-title.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-trending-content',
@@ -14,7 +15,8 @@ import { UiMyMoviesTitleComponent } from '../../ui/my-movies-title/ui-my-movies-
 })
 export class TrendingContentComponent {
   @Input({required: true}) trendingMovies: TmdbTrendingMovie[] | null = null
-
+  constructor(private router: Router) {}
+  
   responsiveOptions = [
     {
       breakpoint: '3000px',
@@ -46,5 +48,9 @@ export class TrendingContentComponent {
 
   private checkScreenSize() {
     this.isMobile = window.innerWidth <= 768;
+  }
+
+  toMovieDetails( mediaType: string, id: number ) {
+    this.router.navigate(['/detalhes-filme', mediaType,  id])
   }
 }
