@@ -5,9 +5,9 @@
     class="w-[100%] h-6  placeholder-gray-50 bg-gray-700 p-4"
     placeholder="Encontre filmes, séries e muito mais"
     />
-    <div class="flex flex-row flex-wrap mt-4">
+    <div class="flex flex-row flex-wrap gap-4 items-center justify-center mt-4">
       <div 
-        class="mr-4 flex-shrink-0" 
+        class=" flex-shrink-0" 
         *ngFor="let movie of discoveryMovies"
         (click)="toMovieDetails(movie.media_type, movie.id)"
         >

@@ -1,4 +1,3 @@
-import { NgOptimizedImage } from '@angular/common';
 import { Component, HostListener, Input } from '@angular/core';
 import { CarouselModule } from 'primeng/carousel';
 import type { TmdbTrendingMovie } from '../../../types/TmdbTrending';
@@ -8,9 +7,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-trending-content',
   standalone: true,
-  imports: [
-    NgOptimizedImage, CarouselModule, UiMyMoviesTitleComponent
-],
+  imports: [ CarouselModule, UiMyMoviesTitleComponent ],
   templateUrl: './trending-content.component.html',
 })
 export class TrendingContentComponent {

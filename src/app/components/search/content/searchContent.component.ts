@@ -16,9 +16,12 @@ export class SearchContentComponent {
 
   ngOnInit(): void {
     this.discoveryService.getAllTmdbMovies().subscribe((data) => {
-      this.discoveryMovies = data.results
-      console.log("data.results", data.results)
-      console.log("this.discoveryMovies", this.discoveryMovies)
+      this.discoveryMovies = data.results.map(movie => {
+        return {
+          ...movie,
+          media_type: "movie"
+        }
+      })
     })
   }
 }

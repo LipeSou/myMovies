@@ -9,20 +9,32 @@ import { TmdbList } from '../../../types/TmdbList';
   providedIn: 'root'
 })
 export class DiscoveryService {
+  apiKey = "d5cf27f9ea9d20ec45b1f08479ce34e8"
+  minimumNumberVotes = 40
+  minimumVoteAverage = 7
+  language= "pt-BR"
+  page= 1
 
   private url = tmdbGlobalVariables.endpoint
 
   constructor(private http: HttpClient) { }
 
   getTmdbMovie() : Observable<Tmdb>{
-    return this.http.get<Tmdb>(`${this.url}/3/movie/15?api_key=d5cf27f9ea9d20ec45b1f08479ce34e8&language=pt-BR'`)
+    return this.http.get<Tmdb>(`${this.url}/3/movie/15?api_key=${this.apiKey}&language=pt-BR'`)
   }
 
   getAllTmdbMovies(): Observable<TmdbList>{
-    return this.http.get<TmdbList>(`${this.url}/discover/movie?api_key=d5cf27f9ea9d20ec45b1f08479ce34e8&include_adult=false&include_video=false&language=pt-BR&page=1&primary_release_date.gte=2020-01-01&sort_by=popularity.desc'`, {
+    return this.http.get<TmdbList>(`${this.url}/discover/movie`, {
       headers: {
         accept: 'application/json',
         Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkNWNmMjdmOWVhOWQyMGVjNDViMWYwODQ3OWNlMzRlOCIsIm5iZiI6MTcyMjgwODgyNi44ODI5MzgsInN1YiI6IjY2MDM2OTM1MWIxZjNjMDE3YzlkZWMyNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.NRR3qFNWq1NgCkgDVFENGXOE1WUNqsJ18QzPwi7D1Qg'
+      }, 
+      params: {
+        api_key: this.apiKey,
+        language: this.language,
+        page: this.page,
+        "vote_count.gte": this.minimumNumberVotes,
+        "vote_average.gte": this.minimumVoteAverage,
       }
     })
   }

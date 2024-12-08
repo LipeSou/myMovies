@@ -1,7 +1,7 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { InputTextModule } from 'primeng/inputtext';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-main-search',
