@@ -1,11 +1,20 @@
-<header class="fixed z-10 w-screen bg-black bg-opacity-60">
+<header class="p-2 flex justify-between fixed z-10 w-screen bg-black bg-opacity-60">
     <div 
-      class="p-2 flex items-center gap-1"
+      class=" flex items-center gap-1"
       (click)="toHome()"
       >
-      <ng-icon name="phosphorPopcornBold" size="32" color="#E1C964"></ng-icon>
+      <ng-icon name="phosphorPopcorn" size="32" color="#E1C964"></ng-icon>
       <h1 class="text-[#E1C964]  text-xl">
         My Movies
       </h1>
+    </div>
+    <div>
+      <ng-icon 
+        name="phosphorMagnifyingGlass" 
+        size="32" 
+        color="#E1C964"
+        (click)="toSearch()"
+        >
+      </ng-icon>
     </div>
 </header>
