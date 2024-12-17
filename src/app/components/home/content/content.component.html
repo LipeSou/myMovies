@@ -1,6 +1,6 @@
 <div>
   <app-navbar />
-  <best-rated-content [bestRateds]="topRatedTrendingMovie"/>
-  <app-trending-content [trendingMovies]="trendingMovies"/>
+  <best-rated-content [bestRateds]="topRatedTrendingMovie" [loading]="loading"/>
+  <app-trending-content [trendingMovies]="trendingMovies" [loading]="loading"/>
   <app-footer />
 </div>

@@ -1,5 +1,6 @@
 <section class="mb-16">
-  <p-galleria 
+  @if (!loading) {
+    <p-galleria 
     [value]="images" 
     [showThumbnails]="false" 
     [showIndicators]="false" 
@@ -8,29 +9,33 @@
     [transitionInterval]="8000" 
     containerClass="main-galleria"
     >
-    <ng-template 
-      pTemplate="item" 
-      let-item
-      >
-        <div class="relative">
-          <img 
-            [src]="item.source" 
-            [alt]="item.alt" 
-            class="gallery-image  w-full object-cover"
-          />
-          <div class="absolute  bottom-[-40px] left-0 right-0 text-center ">
-            <button  
-            (click)="toMovieDetails(item.mediaType, item.id)"
-            class=" text-xl p-4 rounded bg-black  text-white font-medium border border-solid border-[#E1C964]"
-            >
-              <div class="flex items-center gap-2">
-                <ng-icon name="phosphorFilmSlateBold" size="32" color="#E1C964"></ng-icon>
+      <ng-template 
+        pTemplate="item" 
+        let-item
+        >
+          <div class="relative">
+            <img 
+              [src]="item.source" 
+              [alt]="item.alt" 
+              class="gallery-image  w-full object-cover"
+            />
+            <div class="absolute  bottom-[-40px] left-0 right-0 text-center ">
+              <button  
+              (click)="toMovieDetails(item.mediaType, item.id)"
+              class=" text-xl p-4 rounded bg-black  text-white font-medium border border-solid border-[#E1C964]"
+              >
+                <div class="flex items-center gap-2">
+                  <ng-icon name="phosphorFilmSlateBold" size="32" color="#E1C964"></ng-icon>
 
-                <span>Ver Mais</span>
-              </div>
-            </button>
+                  <span>Ver mais</span>
+                </div>
+              </button>
+            </div>
           </div>
-        </div>
-    </ng-template>
-  </p-galleria>
+      </ng-template>
+    </p-galleria>
+  } @else {
+    <div class="animate-pulse w-full h-[600px] bg-slate-700"></div>
+  }
+  
   </section>

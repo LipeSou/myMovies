@@ -15,18 +15,32 @@ import { FooterComponent } from "../footer/footer.component";
 export class ContentComponent {
   trendingMovies: TmdbTrendingMovie[] | [] = []
   topRatedTrendingMovie: TmdbTrendingMovie[] | [] = []
+  loading: boolean = false
   
 
   constructor(private trendingService: TrendingService){}
 
   ngOnInit(): void {
+    this.loading = true; // Inicia o carregamento
+
     this.trendingService.getTrendingMovies({
       time: Time.DAY, 
       type: Type.ALL
-    }).subscribe((data) => {
-      const movies = [...data.results]
-      this.trendingMovies = data.results
-      this.topRatedTrendingMovie = movies.slice(0,7).sort((a,b) => b.vote_average - a.vote_average).slice(0,2)
-    })
+    }).subscribe({
+      next: (data) => {
+        const movies = [...data.results];
+        this.trendingMovies = data.results;
+        this.topRatedTrendingMovie = movies
+          .slice(0, 7)
+          .sort((a, b) => b.vote_average - a.vote_average)
+          .slice(0, 2);
+      },
+      error: (err) => {
+        console.error('Erro ao carregar filmes', err);
+      },
+      complete: () => {
+        this.loading = false;
+      }
+    });
   }
 }

@@ -25,6 +25,7 @@ interface Images {
 })
 export class BestRatedContentComponent {
   @Input({required: true}) bestRateds: TmdbTrendingMovie[] | [] = []
+  @Input({required: true}) loading: boolean = false
   images: Images[] = [];
 
   constructor(private router: Router) {}

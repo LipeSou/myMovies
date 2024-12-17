@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 })
 export class TrendingContentComponent {
   @Input({required: true}) trendingMovies: TmdbTrendingMovie[] | null = null
+  @Input({required: true}) loading: boolean = false
   constructor(private router: Router) {}
   
   responsiveOptions = [
