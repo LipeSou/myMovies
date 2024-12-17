@@ -30,7 +30,8 @@ export class MainSearchComponent {
   onSearch(query: string) {
     this.searchService.getSearch({query}).subscribe((data) => {
       const movies = [...data.results]
-      this.searchMovies = movies
+      const filterMovies = movies.filter(movie => movie.media_type !== "person")
+      this.searchMovies = filterMovies
     })
   }
 
