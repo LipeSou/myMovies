@@ -2,7 +2,7 @@
   <input 
     type="text" 
     pInputText formControlName="text" 
-    class="w-[100%] h-6 mb-4  placeholder-gray-50 text-gray-50 bg-gray-700 p-4"
+    class="w-[100%] h-6 mb-4  placeholder-gray-50 text-gray-50 bg-gray-700 p-6"
     placeholder="Encontre filmes, séries e muito mais"
     />
   @if (searchMovies.length > 0) {
@@ -28,7 +28,7 @@
         (click)="toMovieDetails(movie.media_type, movie.id)"
         >
         <img
-          class="h-40 w-28 rounded object-cover object-center"
+          class="h-44 w-32 rounded object-cover object-center"
           [src]="'https://image.tmdb.org/t/p/w500/' + (movie?.poster_path)"
           alt="content"
         />

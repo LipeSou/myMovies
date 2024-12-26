@@ -9,7 +9,7 @@
           (click)="toMovieDetails(movie.media_type, movie.id)"
           >
           <img
-            class="h-40 w-28 rounded object-cover object-center"
+            class="h-44 w-32 rounded object-cover object-center"
             [src]="'https://image.tmdb.org/t/p/w500/' + (movie?.poster_path)"
             alt="content"
           />
@@ -48,7 +48,7 @@
     *ngIf="!isMobile"
     >
     <ng-template pTemplate="item" let-movie>
-      <img class="h-40 w-28 rounded object-cover object-center " 
+      <img class="h-44 w-32 rounded object-cover object-center " 
           [src]="'https://image.tmdb.org/t/p/w500/' + (movie?.poster_path)" 
           alt="content">
       <p class="w-28 h-10 italic text-yellow-50 text-ellipsis">{{ movie?.title || movie.name }}</p>
