@@ -4,8 +4,9 @@ import { NavbarComponent } from "../../ui/navbar/navbar.component";
 import { ActivatedRoute } from '@angular/router';
 import { MovieDetailsHeaderComponent } from "../movie-details-header/movie-details-header.component";
 import { TvDetailsService } from '../../../services/tmdb/tvDetails/tvDetails.service';
-import type { Genres, Networks } from '../../../types/TmdbTvDetails';
+import type { Genres, Networks, Seasons } from '../../../types/TmdbTvDetails';
 import type { Flatrate } from '../../../types/MovieProvider';
+import { SeasonsDetailsComponent } from '../season-details/season-details.component';
 
 export interface Details {
   title: string, 
@@ -16,18 +17,20 @@ export interface Details {
   genres: Genres[], 
   voteAverage: string,
   networks?: Networks[]
+  seasons?: Seasons[]
 }
 
 @Component({
   selector: 'movie-details-content',
   standalone: true,
-  imports: [NavbarComponent, MovieDetailsHeaderComponent],
+  imports: [NavbarComponent, MovieDetailsHeaderComponent, SeasonsDetailsComponent],
   templateUrl: './movieDetailsContent.component.html',
 })
 export class MovieDetailsContent {
   movie: Details | null = null
   movieId: number | null = null
   movieProvider: Flatrate[] | [] = []
+  type: string | null = null
 
   constructor(
     private movieDetailsService: MovieDetailsService,
@@ -38,10 +41,12 @@ export class MovieDetailsContent {
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');
-      const type = params.get('type');
+      const getType = params.get('type');
+      this.type = getType
+
       if (id) {
         this.movieId = +id; 
-        if(type === "tv"){
+        if(getType === "tv"){
           this.loadTvDetails();
         }else{
           this.loadMovieDetails();
@@ -64,7 +69,7 @@ export class MovieDetailsContent {
         genres, 
         vote_average,
       } = data
-      console.log("data movie", data)
+
       this.movie = {
         title,
         originalTitle: original_title,
@@ -102,7 +107,8 @@ export class MovieDetailsContent {
         overview, 
         genres, 
         vote_average,
-        networks
+        networks,
+        seasons
       } = data
       console.log("data tv", data)
       this.movie = {
@@ -113,14 +119,15 @@ export class MovieDetailsContent {
         posterPath: poster_path,
         backdropPath: backdrop_path,
         voteAverage: vote_average.toFixed(1),
-        networks
+        networks,
+        seasons
       }
     })
     // busca quais streamings o filme esta disponivel
     this.tvDetailsService.getTvProviders({
       movieId: this.movieId as number
     }).subscribe((data) => {
-      console.log("data", data)
+
       const flatrateProviders = data.results?.BR?.flatrate || [];
 
       const providers = flatrateProviders.filter(provider => {

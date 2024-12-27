@@ -1,4 +1,7 @@
 <section>
   <app-navbar />
   <app-movie-details-header [movieDetais]="movie" [movieProvider]="movieProvider"/>
+  @if (type === "tv") {
+    <season-details [seasons]="movie?.seasons"/>
+  }
 </section>

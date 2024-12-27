@@ -1,0 +1,17 @@
+<div class="px-4 py-8">
+  <h4>Temporadas</h4>
+  <div class="mt-8 flex gap-6 overflow-x-auto no-scrollbar">
+    @for (season of seasons; track $index) {
+      <div>
+        <p>
+          {{ season.name }}
+        </p>
+        <img
+            class="h-44 w-32 rounded object-cover object-center"
+            [src]="'https://image.tmdb.org/t/p/w500/' + (season.poster_path)"
+            alt="content"
+          />
+      </div>
+    }
+  </div>
+</div>
