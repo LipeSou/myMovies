@@ -4,9 +4,10 @@ import { NavbarComponent } from "../../ui/navbar/navbar.component";
 import { ActivatedRoute } from '@angular/router';
 import { MovieDetailsHeaderComponent } from "../movie-details-header/movie-details-header.component";
 import { TvDetailsService } from '../../../services/tmdb/tvDetails/tvDetails.service';
-import type { Genres, Networks, Seasons } from '../../../types/TmdbTvDetails';
+import type { Genres, Networks, Seasons, TmdbTvDetails } from '../../../types/TmdbTvDetails';
 import type { Flatrate } from '../../../types/MovieProvider';
 import { SeasonsDetailsComponent } from '../season-details/season-details.component';
+import type { TmdbMovieDetails } from '../../../types/TmdbMovieDetails';
 
 export interface Details {
   title: string, 
@@ -16,8 +17,10 @@ export interface Details {
   overview: string, 
   genres: Genres[], 
   voteAverage: string,
-  networks?: Networks[]
-  seasons?: Seasons[]
+  networks?: Networks[],
+  seasons?: Seasons[],
+  releaseYear: number,
+  tagline: string
 }
 
 @Component({
@@ -28,6 +31,7 @@ export interface Details {
 })
 export class MovieDetailsContent {
   movie: Details | null = null
+  movieData: TmdbMovieDetails | TmdbTvDetails | null = null
   movieId: number | null = null
   movieProvider: Flatrate[] | [] = []
   type: string | null = null
@@ -59,7 +63,7 @@ export class MovieDetailsContent {
     // busca os detalhes do filme
     this.movieDetailsService.getMovie({ 
       movieId: this.movieId as number
-    }).subscribe(data => {
+    }).subscribe((data: TmdbMovieDetails) => {
       const { 
         title, 
         original_title, 
@@ -68,8 +72,12 @@ export class MovieDetailsContent {
         overview, 
         genres, 
         vote_average,
+        release_date,
+        tagline,
       } = data
 
+      const releaseYear = new Date(release_date).getFullYear() 
+      
       this.movie = {
         title,
         originalTitle: original_title,
@@ -77,8 +85,11 @@ export class MovieDetailsContent {
         genres,
         posterPath: poster_path,
         backdropPath: backdrop_path,
-        voteAverage: vote_average.toFixed(1)
+        voteAverage: vote_average.toFixed(1),
+        releaseYear,
+        tagline
       }
+      this.movieData = data
     })
     // busca quais streamings o filme esta disponivel
     this.movieDetailsService.getWatchProviders({
@@ -108,9 +119,13 @@ export class MovieDetailsContent {
         genres, 
         vote_average,
         networks,
-        seasons
+        seasons,
+        first_air_date,
+        tagline
       } = data
-      console.log("data tv", data)
+
+      const releaseYear = new Date(first_air_date).getFullYear()
+
       this.movie = {
         title: name,
         originalTitle: original_name,
@@ -120,8 +135,12 @@ export class MovieDetailsContent {
         backdropPath: backdrop_path,
         voteAverage: vote_average.toFixed(1),
         networks,
-        seasons
+        seasons,
+        releaseYear,
+        tagline
       }
+
+      this.movieData = data
     })
     // busca quais streamings o filme esta disponivel
     this.tvDetailsService.getTvProviders({

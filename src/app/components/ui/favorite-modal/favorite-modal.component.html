@@ -1,0 +1,68 @@
+<p-dialog [(visible)]="visible">
+    <ng-template pTemplate="headless">
+        <div class=" bg-slate-950 rounded-xl w-72  p-4">
+          <div class="flex justify-between ">
+            <p class="text-lg text-slate-200">Salvar filme <span class="font-bold">{{ movieDetails?.title }}</span> na playlist:</p>
+            <ng-icon 
+              name="phosphorX" 
+              size="16" 
+              color="#FEFCE8"
+              (click)="closeDialog()"
+            ></ng-icon>
+          </div>
+          <div>
+            @if (watchlists && watchlists.length > 0) {
+              <div *ngFor="let watchlist of watchlists" class="field-checkbox my-4">
+                  <label class="inline-flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      class="form-checkbox h-5 w-5 text-blue-600 "
+                      (onclick)="saveSelected(watchlist)"
+                      [checked]="watchlistSelected?.id === watchlist?.id"
+                    />
+                    <span>{{ watchlist.name }}</span>
+                  </label>
+                </div>
+              }
+              @else {
+                <div class="p-8 flex items-center justify-center flex-col gap-5 text-slate-200">
+                  <ng-icon 
+                    name="phosphorSmileyXEyes" 
+                    size="40" 
+                    color="#FEFCE8"
+                    (click)="closeDialog()"
+                  ></ng-icon>
+                  <p>Você ainda não possui nenhuma playlist clique em <span class="font-bold">Criar Playlist</span> para criar sua primeira playlist</p>
+                </div>
+              }
+              
+            </div>
+          <p-button
+             (onClick)="closeDialog()"
+             styleClass="w-full p-2 mb-3 bg-yellow-300 flex justify-center text-slate-900 font-bold"
+             [disabled]="!watchlistSelected?.id"
+             >
+             <ng-icon 
+                name="phosphorPlus" 
+                size="16" 
+                color="#FEFCE8"
+                (click)="closeDialog()"
+              ></ng-icon>
+              Salvar na Playlist             
+          </p-button>
+          <p-button
+             (onClick)="closeDialog()"
+             styleClass="w-full p-2 bg-slate-700 flex justify-center"
+             >
+             <ng-icon 
+                name="phosphorPlus" 
+                size="20" 
+                color="#FEFCE8"
+                (click)="closeDialog()"
+                class="mr-1"
+              ></ng-icon>
+              Criar Playlist             
+          </p-button>
+        </div>
+    </ng-template>
+</p-dialog> 

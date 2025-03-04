@@ -1,9 +1,9 @@
-<div class="px-4 py-8">
+<div class="px-4 pb-8 w-full">
   <h4>Temporadas</h4>
-  <div class="mt-8 flex gap-6 overflow-x-auto no-scrollbar">
+  <div class="mt-4 flex gap-6 overflow-x-auto no-scrollbar">
     @for (season of seasons; track $index) {
-      <div>
-        <p>
+      <div class="text-center ">
+        <p class="mb-2">
           {{ season.name }}
         </p>
         <img

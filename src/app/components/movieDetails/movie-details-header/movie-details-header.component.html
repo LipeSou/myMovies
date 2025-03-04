@@ -1,5 +1,11 @@
 <div class="w-screen"> 
-  <div class="mb-28">
+  <favorite-modal 
+    [visible]="visible" 
+    (onCloseDialog)="closeDialog()"
+    [movieData]="movieData"
+    [movieDetails]="movieDetais"
+    />
+  <div class="mb-16">
     <img 
     [src]="'https://image.tmdb.org/t/p/w500/' + (movieDetais?.backdropPath)" 
     [alt]="movieDetais?.title" 
@@ -15,8 +21,28 @@
     </div>
   </div>
   <div class="px-4">
-    <h2>{{ movieDetais?.title || movieDetais?.originalTitle }}</h2>
-    <div class="text-slate-50 text-xs mb-3">
+    @if (movieDetais?.tagline) {
+      <p class="text-center text-sm text-slate-50 italic opacity-70">{{ movieDetais?.tagline }}</p>
+    }
+    <h2 class="text-center">
+      {{ movieDetais?.title || movieDetais?.originalTitle }}
+      <span class="text-slate-50 text-xs">{{ movieDetais?.releaseYear }}</span>
+    </h2>
+    <div class="flex flex-col items-center justify-center mt-8">
+      <div class="w-14 flex flex-col items-center text-center">
+      <ng-icon 
+          name="phosphorListHeart" 
+          size="40" 
+          color="#FEFCE8"
+          (click)="showDialog()"
+          >
+        </ng-icon>
+        <p class="text-[10px]">Adicionar para lista</p>
+      </div>
+      <div class="card bg-slate-900 flex justify-content-center">      
+    </div>
+    </div>
+    <div class="text-slate-50 text-xs mt-12 mb-3">
       @for (genre of movieDetais?.genres; track genre?.name) {
           <span>{{ genre.name }}</span>
           @if (!$last) {
@@ -30,7 +56,7 @@
   </div>
 
   @if (movieProvider && movieProvider.length > 0) {
-    <div class="px-4 py-8">
+    <div class="px-4 py-12">
       <h4>Disponível para assistir</h4>
       <p class="text-[10px] italic opacity-70">Fonte: TMDB com parceria com JustWatch.</p>
       <div class="flex gap-5 px-2 w-full flex-wrap justify-center">

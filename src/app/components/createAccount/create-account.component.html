@@ -1,3 +1,4 @@
+<p-toast></p-toast>
 <div  
   class=" flex flex-col gap-4 h-[100vh] items-center justify-center bg-gray-900 " 
   [formGroup]="searchLogin"
@@ -10,14 +11,23 @@
         My Movies
       </h1>
     </div>
-  <h3>Acesse sua conta</h3>
+  <h3>Crie sua conta!</h3>
+  <div class="flex flex-col gap-1 w-full items-center justify-center">
+    <label class="text-lg self-start ml-[10%]">Nome</label>
+    <input 
+      type="text" 
+      pInputText formControlName="name" 
+      class="w-[80%] h-6  placeholder-gray-50 text-gray-50 bg-gray-700 p-6"
+      placeholder="Seu Nome"
+      />
+  </div>
   <div class="flex flex-col gap-1 w-full items-center justify-center">
     <label class="text-lg self-start ml-[10%]">E-mail</label>
     <input 
       type="email" 
       pInputText formControlName="email" 
       class="w-[80%] h-6  placeholder-gray-50 text-gray-50 bg-gray-700 p-6"
-      placeholder="Digite aqui seu E-mail"
+      placeholder="Seu melhor Email!"
       />
   </div>
   <div class="flex flex-col gap-1 w-full items-center justify-center">
@@ -26,22 +36,22 @@
         type="password" 
         pInputText formControlName="password" 
         class="w-[80%] h-6  placeholder-gray-50 text-gray-50 bg-gray-700 p-6"
-        placeholder="Digite aqui sua senha"
+        placeholder="Coloque sua Senha"
         />
   </div>
   <div class="w-[80%] mt-4">
     <button  
-      (click)="onLogin()"
+      (click)="onCreateAccount()"
       class="w-full text-xl p-2 bg-black  text-white font-medium border border-solid border-[#E1C964] rounded-md"
       >
         <div class="flex items-center gap-2 justify-center">
-          <ng-icon name="phosphorSignIn" size="32" color="#E1C964"></ng-icon>
+          <ng-icon name="phosphorUserPlus" size="32" color="#E1C964"></ng-icon>
 
-          <span>Login</span>
+          <span>Criar Conta</span>
         </div>
     </button>
   </div>
   <div class="w-[60%] mt-4 text-center">
-    <a (click)="toSignInPage()">Não possui uma conta? Crie sua conta</a>
+    <a (click)="toLoginPage()">Caso já possua uma conta clique aqui para voltar a tela de login</a>
   </div>
 </div>

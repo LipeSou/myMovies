@@ -4,13 +4,13 @@ import { Router } from '@angular/router';
 import { InputTextModule } from 'primeng/inputtext';
 import { ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { phosphorPopcorn } from '@ng-icons/phosphor-icons/regular';
+import { phosphorPopcorn, phosphorSignIn, phosphorUserPlus  } from '@ng-icons/phosphor-icons/regular';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [InputTextModule, CommonModule, ReactiveFormsModule, NgIcon],
-  providers: [provideIcons({ phosphorPopcorn })],
+  providers: [provideIcons({ phosphorPopcorn, phosphorSignIn, phosphorUserPlus })],
   templateUrl: './login.component.html',
 })
 export class LoginComponent {
@@ -20,9 +20,13 @@ export class LoginComponent {
     this.router.navigate(['/'])
   }
 
+  toSignInPage() {
+    this.router.navigate(['/criar-conta'])
+  }
+
   // input de busca e debounce 
   searchLogin = new FormGroup({
-    name: new FormControl('') ,
+    email: new FormControl('') ,
     password: new FormControl('') 
   });
 
