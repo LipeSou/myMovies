@@ -5,12 +5,14 @@ import { SearchContentComponent } from './components/search/content/searchConten
 import { LoginComponent } from './components/login/login.component';
 import { CreateAccountComponent } from './components/createAccount/create-account.component';
 import { MyListContentComponent } from './components/my-list/content/my-list-content.component';
+import { LoginAccountCreatedComponent } from './components/loginAccountCreated/login-account-created.component';
 
 export const routes: Routes = [
   { path: '', component: ContentComponent },
   { path: 'login', component: LoginComponent },
   { path: 'criar-conta', component: CreateAccountComponent },
-  { path: 'search', component: SearchContentComponent},
-  { path: 'detalhes-filme/:type/:id', component: MovieDetailsContent},
-  { path: 'minhas-listas', component: MyListContentComponent}
+  { path: 'conta-criada', component: LoginAccountCreatedComponent },
+  { path: 'search', component: SearchContentComponent },
+  { path: 'detalhes-filme/:type/:id', component: MovieDetailsContent },
+  { path: 'minhas-listas', component: MyListContentComponent },
 ];

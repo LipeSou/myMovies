@@ -17,9 +17,9 @@ import {
   providers: [
     provideIcons({ phosphorPopcorn, phosphorSignIn, phosphorUserPlus }),
   ],
-  templateUrl: './login.component.html',
+  templateUrl: './login-account-created.component.html',
 })
-export class LoginComponent {
+export class LoginAccountCreatedComponent {
   constructor(private router: Router) {}
 
   toHomePage() {
@@ -47,35 +47,7 @@ export class LoginComponent {
     //       this.searchMovies = [];
     //     }
     //   });
-
-    // this.usersService
-    //     .createUser({ name: name!, email: email!, password: password! })
-    //     .subscribe({
-    //       next: () => {
-    //         this.messageService.add({
-    //           severity: 'success',
-    //           summary: 'Sucesso',
-    //           detail: 'Conta criada com sucesso!',
-    //         });
-
-    //         this.toAccountCreatePage();
-    //       },
-    //       error: (err) => {
-    //         this.messageService.add({
-    //           severity: 'error',
-    //           summary: 'Erro',
-    //           detail: err?.error?.message[0] || 'Erro ao criar conta!',
-    //         });
-    //       },
-    //     });
-    // } else {
-    //   this.messageService.add({
-    //     severity: 'warn',
-    //     summary: 'Aviso',
-    //     detail: 'Por favor, preencha os campos corretamente.',
-    //   });
-    // }
-
+    console.log('login feito!');
     this.toHomePage();
   }
 }
