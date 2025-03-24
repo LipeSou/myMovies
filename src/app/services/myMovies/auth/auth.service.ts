@@ -6,6 +6,11 @@ interface LoginResponse {
   access_token: string;
 }
 
+type LoginParams = {
+  email: string;
+  password: string;
+};
+
 @Injectable({
   providedIn: 'root',
 })
@@ -14,9 +19,9 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  login(email: string, password: string): Observable<LoginResponse> {
+  login({ email, password }: LoginParams): Observable<LoginResponse> {
     const body = { email, password };
-    return this.http.post<LoginResponse>(`${this.API_URL}/auth/login`, body);
+    return this.http.post<LoginResponse>(`${this.API_URL}/login`, body);
   }
 
   // Armazena o token no localStorage (ou sessionStorage)
@@ -28,7 +33,6 @@ export class AuthService {
     return localStorage.getItem('access_token');
   }
 
-  // Apenas um exemplo de função para remover o token do localStorage
   logout(): void {
     localStorage.removeItem('access_token');
   }

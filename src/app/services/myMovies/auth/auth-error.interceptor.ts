@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 import { catchError, throwError } from 'rxjs';
 import { MessageService } from 'primeng/api';
 
-export const authErrorInterceptorFn: HttpInterceptorFn = (
+export const authErrorInterceptor: HttpInterceptorFn = (
   request: HttpRequest<unknown>,
   next: HttpHandlerFn
 ) => {
@@ -20,9 +20,11 @@ export const authErrorInterceptorFn: HttpInterceptorFn = (
     catchError((error: HttpErrorResponse) => {
       if (error.status === 401) {
         messageService.add({
-          severity: 'error',
-          summary: 'Sessão Expirada',
-          detail: 'Faça login novamente para continuar.',
+          severity: 'warn',
+          summary: error?.message ? 'Verifique seus dados' : 'Sessão Expirada',
+          detail: error?.message
+            ? 'Por favor, preencha os campos corretamente.'
+            : 'Faça login novamente para continuar.',
         });
         router.navigate(['/login']);
       } else if (error.status === 403) {

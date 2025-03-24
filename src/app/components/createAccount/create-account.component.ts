@@ -44,7 +44,6 @@ export class CreateAccountComponent {
     this.router.navigate(['/conta-criada']);
   }
 
-  // input de busca e debounce
   searchLogin = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     name: new FormControl('', [Validators.required, Validators.minLength(3)]),
